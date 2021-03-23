@@ -1,18 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class HubSceneController : MonoBehaviour
+namespace TwoRuns
 {
-    // Start is called before the first frame update
-    void Start()
+    public class HubSceneController : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private Text messageText;
+        [SerializeField] private Button buttonReady;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void OnReadyButtonClick()
+        {
+            messageText.text = Consts.MSG_GAME_SEARCH;
+            buttonReady.interactable = false;
+
+            ThreadHelper.RunInNewThread(() =>
+            {
+                bool gameReady = WebClient.SendReady();
+
+                ThreadHelper.RunInUnityThread(() => // in Unity thread
+                {
+                    buttonReady.interactable = true;
+                    if (gameReady)
+                    {
+                        messageText.text = Consts.MSG_GAME_FOUND; // load online scene in WebClient
+                    }
+                    else
+                    {
+                        messageText.text = Consts.MSG_GAME_NOT_FOUND;
+                    }
+                });
+            });
+        }
+        public void OnSingleplayerButtonClick()
+        {
+            SceneLoader.LoadSingleplayer();
+        }
     }
 }

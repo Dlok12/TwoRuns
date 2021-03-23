@@ -829,6 +829,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1041353455}
+  - component: {fileID: 1041353454}
   m_Layer: 0
   m_Name: LoginSceneController
   m_TagString: Untagged
@@ -836,6 +837,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1041353454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041353453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a22b139fc5ed82498d7af17f683f407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginInputField: {fileID: 1570481351}
+  passwordInputField: {fileID: 1953552312}
+  toggleRemember: {fileID: 131753142}
+  messageText: {fileID: 1697244244}
+  buttonLogin: {fileID: 1700038768}
 --- !u!4 &1041353455
 Transform:
   m_ObjectHideFlags: 0
@@ -931,7 +949,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1498998000}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1041353454}
+        m_MethodName: OnSingleplayerClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1498998000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1347,7 +1376,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1700038769}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1041353454}
+        m_MethodName: OnLoginButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1700038769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1874,3 +1914,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138350977}
   m_CullTransparentMesh: 0
+--- !u!1001 &4470519854736412768
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 588.3451
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 226.81918
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 29.566166
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139109490165715966, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872871516669580162, guid: d6b56864c09cbc9418c52c5bd06b246c,
+        type: 3}
+      propertyPath: m_Name
+      value: ThreadHelper
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d6b56864c09cbc9418c52c5bd06b246c, type: 3}
