@@ -4,29 +4,40 @@ namespace TwoRuns
 {
     class SceneLoader
     {
+        private static bool _isOnline = false;
+
+        /// <summary>
+        /// Is Online scene
+        /// </summary>
+        public static bool IsOnline
+        {
+            get => _isOnline;
+        }
         public static void LoadLogin()
         {
             SceneManager.LoadScene(Consts.LOGIN_SCENE_NAME);
+            _isOnline = false;
         }
         public static void LoadHub()
         {
             SceneManager.LoadScene(Consts.HUB_SCENE_NAME);
+            _isOnline = false;
         }
         public static void LoadSingleplayer()
         {
-            SceneManager.LoadScene(Consts.SINGLEPLAYER_SCENE_NAME);
+            SceneManager.LoadScene(Consts.GAME_SCENE_NAME);
+            _isOnline = false;
         }
         public static void LoadOnline()
         {
-            SceneManager.LoadScene(Consts.ONLINE_SCENE_NAME);
+            SceneManager.LoadScene(Consts.GAME_SCENE_NAME);
+            _isOnline = true;
         }
-        public static bool IsSingleplayer()
+
+        public static void LoadTest()
         {
-            return SceneManager.GetActiveScene().name == Consts.SINGLEPLAYER_SCENE_NAME;
-        }
-        public static bool IsOnlineScene()
-        {
-            return SceneManager.GetActiveScene().name == Consts.ONLINE_SCENE_NAME;
+            SceneManager.LoadScene("TestScene");
+            _isOnline = false;
         }
     }
 }

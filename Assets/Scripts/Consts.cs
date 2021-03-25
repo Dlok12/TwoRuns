@@ -25,14 +25,16 @@
         // Scene names
         public const string LOGIN_SCENE_NAME = "LoginScene";
         public const string HUB_SCENE_NAME = "HubScene";
-        public const string SINGLEPLAYER_SCENE_NAME = "SingleplayerScene";
+        public const string GAME_SCENE_NAME = "GameScene";
+
         public const string ONLINE_SCENE_NAME = "OnlineScene";
 
         // Player prefs
+        public const string PLAYER_PREFS_LOGIN = "login";
         public const string PLAYER_PREFS_KEY_TOKEN = "token";
         public const string PLAYER_PREFS_KEY_HIGHSCORE = "highscore";
-        public const string PLAYER_PREFS_LOGIN = "login";
 
-        public const float K_LERP = 0.1f; // ???
+        // Interpolation
+        public const float K_LERP = 0.25f;
     }
 }

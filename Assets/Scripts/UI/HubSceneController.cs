@@ -10,7 +10,6 @@ namespace TwoRuns
 
         public void OnReadyButtonClick()
         {
-            messageText.text = Consts.MSG_GAME_SEARCH;
             buttonReady.interactable = false;
 
             ThreadHelper.RunInNewThread(() =>
@@ -22,7 +21,7 @@ namespace TwoRuns
                     buttonReady.interactable = true;
                     if (gameReady)
                     {
-                        messageText.text = Consts.MSG_GAME_FOUND; // load online scene in WebClient
+                        messageText.text = Consts.MSG_GAME_SEARCH; // load online scene in WebClient
                     }
                     else
                     {

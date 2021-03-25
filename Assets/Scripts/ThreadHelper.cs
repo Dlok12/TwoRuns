@@ -19,9 +19,6 @@ namespace TwoRuns
         }
         public static void RunInNewThread(Action action)
         {
-            if (instance == null)
-                Debug.LogError("ERROR: ThreadHelper is null but called");
-
             Task.Run(action);
         }
 

@@ -43,6 +43,10 @@ namespace TwoRuns
         {
             SceneLoader.LoadSingleplayer();
         }
+        public void OnTestScenenButtonClick()
+        {
+            SceneLoader.LoadTest();
+        }
 
         private void Start()
         {
@@ -66,6 +70,10 @@ namespace TwoRuns
                     }
                 });
             }
+
+#if UNITY_ANDROID
+            //QualitySettings.vSyncCount = 0;
+#endif
         }
     }
 }

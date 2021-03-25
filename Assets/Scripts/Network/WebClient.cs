@@ -9,7 +9,7 @@ namespace TwoRuns
 {
     public class WebClient : MonoBehaviour
     {
-        public static WebClient instance = null;
+        private static WebClient _instance = null;
         /// <summary>
         /// Where WS opened execute OnOpenEventHandler in Unity thread; After - loads Hub
         /// </summary>
@@ -50,6 +50,7 @@ namespace TwoRuns
             public int exp;
             public string uid;
         }
+
 
         /// <summary>
         /// Open WebSocket
@@ -126,7 +127,7 @@ namespace TwoRuns
                 {
                     OnCloseEventHandler(sender, e);
                 }
-                if (!SceneLoader.IsSingleplayer())
+                if (SceneLoader.IsOnline)
                 {
                     SceneLoader.LoadLogin();
                 }
@@ -235,12 +236,11 @@ namespace TwoRuns
         {
             while (true)
             {
-                //if (SceneLoader.IsOnlineScene() && _ws != null && LevelBuilder.instance != null && _ws.IsAlive)
-                //{
-                //    _ws.Send(new byte[] { Consts.PLAYER_POSITION, (byte)(LevelBuilder.instance.GetPlayerPosition() / 2) });
-                //    /*Debug.Log(LevelBuilder.instance.GetPlayerPosition());
-                //    LevelBuilder.instance.SetPlayer2Position(LevelBuilder.instance.GetPlayerPosition() + 45);*/
-                //}
+                if (SceneLoader.IsOnline && Level.CurrentLevel.LevelLoaded && _ws != null && _ws.IsAlive)
+                {
+                    Debug.Log($"Send {Level.CurrentLevel.GetP1Position() / 2}");
+                    _ws.Send(new byte[] { Consts.PLAYER_POSITION, (byte)(Level.CurrentLevel.GetP1Position() / 2) });
+                }
                 yield return new WaitForSecondsRealtime(Consts.CLIENT_TICK_S);
             }
         }
@@ -251,42 +251,39 @@ namespace TwoRuns
         /// <param name="bytes"></param>
         private static void ParseBytes(byte[] bytes)
         {
-            //switch (bytes[0])
-            //{
-            //    case Consts.GAME_READY:
-            //        SceneLoader.LoadOnline();
-            //        playerNumber = bytes[1];
-            //        break;
+            switch (bytes[0])
+            {
+                case Consts.GAME_READY:
+                    Debug.Log($"{bytes[0]}, {bytes[1]}; (len={bytes.Length})");
+                    SceneLoader.LoadOnline();
+                    playerNumber = bytes[1];
+                    break;
 
-            //    case Consts.GAME_OVER:
-            //        SceneLoader.LoadHub();
-            //        break;
+                case Consts.GAME_OVER:
+                    SceneLoader.LoadHub();
+                    break;
 
-            //    case Consts.GAME_SET_BARRIER:
-            //        if (LevelBuilder.instance.Builded)
-            //            LevelBuilder.instance.SetBarrier(bytes[1]);
-            //        break;
+                case Consts.GAME_SET_BARRIER:
+                        Level.CurrentLevel.AddHindrance(bytes[1]);
+                    break;
 
-            //    case Consts.PLAYER_POSITION:
-            //        Debug.Log($"{bytes[0]}, {bytes[1]}, {bytes[2]}; (len={bytes.Length})");
-            //        if (LevelBuilder.instance.Builded)
-            //        {
-            //            if (bytes[1] != playerNumber)
-            //            {
-            //                LevelBuilder.instance.SetPlayer2Position(bytes[2] * 2);
-            //            }
-            //        }
-            //        break;
-            //}
+                case Consts.PLAYER_POSITION:
+                    Debug.Log($"{bytes[0]}, {bytes[1]}, {bytes[2]}; (len={bytes.Length})");
+                    if (bytes[1] != playerNumber)
+                    {
+                        Level.CurrentLevel.SetP2Position(bytes[2] * 2);
+                    }                    
+                    break;
+            }
         }
 
         private void Start()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = this;
+                _instance = this;
             }
-            else if (instance != this)
+            else if (_instance != this)
             {
                 Destroy(gameObject);
             }
